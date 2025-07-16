@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .btn-minimal {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-minimal:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .btn-minimal-solid {
+            background-color: #ffffff;
+            border: 1px solid #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        .btn-minimal-solid:hover {
+            background-color: transparent;
+            color: #ffffff;
+        }
+        .agent-card {
+            border: 1px solid #333;
+            transition: border-color 0.3s ease;
+        }
+        .agent-card:hover {
+            border-color: #ffffff;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            animation: fade-in 0.5s ease-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Custom styles for Flatpickr dark theme */
+        .flatpickr-calendar {
+            background: #111;
+            border: 1px solid #333;
+        }
+        .flatpickr-time input.flatpickr-hour, .flatpickr-time input.flatpickr-minute {
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-40">
+        <div class="container mx-auto px-6 py-5 flex justify-between items-center border-b border-gray-800">
+            <a href="#" class="text-xl font-bold tracking-widest text-white">AURA</a>
+            <nav class="hidden md:flex space-x-10 items-center">
+                <a href="#agents" class="text-sm tracking-wider uppercase text-gray-300 hover:text-white transition">Agents</a>
+                <a href="#architect" class="text-sm tracking-wider uppercase text-gray-300 hover:text-white transition">Architect</a>
+                <a href="#contact" class="text-sm tracking-wider uppercase text-gray-300 hover:text-white transition">Contact</a>
+            </nav>
+            <button onclick="openModal()" class="hidden md:block btn-minimal text-white font-medium py-2 px-5 rounded-sm text-sm tracking-wider uppercase">Delegate Task</button>
+            <button class="md:hidden text-white" id="mobile-menu-button">
+                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-b border-gray-800">
+            <a href="#agents" class="block py-3 px-6 text-gray-300 hover:bg-gray-900">Agents</a>
+            <a href="#architect" class="block py-3 px-6 text-gray-300 hover:bg-gray-900">Architect</a>
+            <a href="#contact" class="block py-3 px-6 text-gray-300 hover:bg-gray-900">Contact</a>
+            <button onclick="openModal()" class="w-full text-left block py-3 px-6 bg-gray-900 text-white">Delegate Task</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-48 pb-32">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-medium text-white leading-tight tracking-tighter">An Interface to My Agents</h1>
+            <p class="mt-6 text-base md:text-lg text-gray-400 max-w-2xl mx-auto">This is the external portal for my personal AI team. Use this site to delegate tasks, schedule appointments, and interact with my automated workflows.</p>
+            <div class="mt-12">
+                <button onclick="openModal()" class="btn-minimal-solid text-black font-semibold py-4 px-10 rounded-sm text-base tracking-wider uppercase">Engage an Agent</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Agents Section -->
+    <section id="agents" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-sm tracking-widest text-gray-400 uppercase">Capabilities</h2>
+                <p class="text-3xl md:text-4xl text-white mt-2">Available Agents</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Agent 1 -->
+                <div class="agent-card p-10 rounded-sm">
+                    <h3 class="text-xl font-semibold text-white mb-3">The Scheduling Agent</h3>
+                    <p class="text-gray-400">Syncs with my calendars, finds optimal meeting times, and manages all booking, confirmation, and rescheduling logistics.</p>
+                </div>
+                <!-- Agent 2 -->
+                <div class="agent-card p-10 rounded-sm">
+                    <h3 class="text-xl font-semibold text-white mb-3">The Comms Agent</h3>
+                    <p class="text-gray-400">Fields incoming messages, categorizes inquiries, and ensures your communication is routed to the correct internal system for a response.</p>
+                </div>
+                <!-- Agent 3 -->
+                <div class="agent-card p-10 rounded-sm">
+                    <h3 class="text-xl font-semibold text-white mb-3">The Project Agent</h3>
+                    <p class="text-gray-400">Initiates project workflows, sets up required resources, and assigns initial tasks based on the parameters you provide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architect Section -->
+    <section id="architect" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x750/000000/ffffff?text=Portrait" alt="The Architect" class="rounded-sm w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-sm tracking-widest text-gray-400 uppercase">The Architect</h2>
+                    <p class="text-3xl md:text-4xl text-white mt-2">System by [Your Name]</p>
+                    <p class="text-gray-400 mt-6">I am the developer and director of the AI agents that power my personal and professional life. This website is the sole, authorized channel for external parties to interact with my automated systems. Every action taken here triggers a precise workflow managed by my n8n backend.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="container mx-auto px-6 max-w-3xl text-center">
+            <h2 class="text-sm tracking-widest text-gray-400 uppercase">Direct Inquiry</h2>
+            <p class="text-3xl md:text-4xl text-white mt-2">Contact the Comms Agent</p>
+            <form id="contactForm" class="mt-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" id="contactName" placeholder="Your Name" class="w-full p-4 rounded-sm bg-transparent border border-gray-700 focus:outline-none focus:border-white text-white">
+                    <input type="email" id="contactEmail" placeholder="Your Email" class="w-full p-4 rounded-sm bg-transparent border border-gray-700 focus:outline-none focus:border-white text-white">
+                </div>
+                <div class="mt-6">
+                    <textarea id="contactMessage" rows="5" placeholder="Your Message" class="w-full p-4 rounded-sm bg-transparent border border-gray-700 focus:outline-none focus:border-white text-white"></textarea>
+                </div>
+                <button type="submit" class="mt-8 btn-minimal text-white font-medium py-3 px-12 rounded-sm text-base tracking-wider uppercase">Submit to Agent</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-10">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p class="text-sm">&copy; 2024 AURA INTERFACE. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <!-- Task Delegation Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content bg-black border border-gray-800 rounded-sm shadow-xl w-11/12 md:max-w-md mx-auto my-20 p-8 relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-2xl font-medium text-white mb-8 text-center">Delegate a Task</h3>
+            <form id="bookingForm">
+                <div class="mb-5">
+                    <label for="name" class="block text-gray-400 text-sm mb-2">Your Full Name</label>
+                    <input type="text" id="name" name="name" required class="w-full p-3 rounded-sm bg-gray-900 border border-gray-700 focus:outline-none focus:border-white text-white">
+                </div>
+                <div class="mb-5">
+                    <label for="email" class="block text-gray-400 text-sm mb-2">Your Email</label>
+                    <input type="email" id="email" name="email" required class="w-full p-3 rounded-sm bg-gray-900 border border-gray-700 focus:outline-none focus:border-white text-white">
+                </div>
+                <div class="mb-5">
+                    <label for="service" class="block text-gray-400 text-sm mb-2">Select Task / Agent</label>
+                    <select id="service" name="service" required class="w-full p-3 rounded-sm bg-gray-900 border border-gray-700 focus:outline-none focus:border-white text-white appearance-none">
+                        <option value="schedule-meeting">Schedule a Meeting</option>
+                        <option value="project-intake">Initiate a New Project</option>
+                        <option value="general-inquiry">Submit a General Inquiry</option>
+                    </select>
+                </div>
+                <div class="mb-8">
+                    <label for="datetime" class="block text-gray-400 text-sm mb-2">Required Date & Time (if applicable)</label>
+                    <input type="text" id="datetime" name="datetime" placeholder="Select a date and time" class="w-full p-3 rounded-sm bg-gray-900 border border-gray-700 focus:outline-none focus:border-white text-white">
+                </div>
+                <button type="submit" id="submitBooking" class="btn-minimal-solid text-black font-bold py-3 px-8 rounded-sm w-full uppercase tracking-wider">
+                    <span id="booking-text">Submit to System</span>
+                    <span id="booking-spinner" class="hidden">
+                        <svg class="animate-spin h-5 w-5 text-black mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+            <div id="bookingMessage" class="mt-6 text-center text-sm"></div>
+        </div>
+    </div>
+
+<script>
+    // --- Mobile Menu ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // --- Modal Logic ---
+    const modal = document.getElementById('bookingModal');
+    function openModal() { modal.style.display = 'block'; }
+    function closeModal() {
+        modal.style.display = 'none';
+        document.getElementById('bookingMessage').innerHTML = '';
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) { closeModal(); }
+    }
+
+    // --- Flatpickr Initialization ---
+    flatpickr("#datetime", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+    });
+
+    // --- n8n Webhook Integration ---
+    const bookingForm = document.getElementById('bookingForm');
+    const bookingMessage = document.getElementById('bookingMessage');
+    const submitBookingBtn = document.getElementById('submitBooking');
+    const bookingBtnText = document.getElementById('booking-text');
+    const bookingSpinner = document.getElementById('booking-spinner');
+    
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // IMPORTANT: Replace this with your actual n8n webhook URL
+        const n8nWebhookUrl = 'https://YOUR_N8N_WEBHOOK_URL.hooks.n8n.cloud/webhook/booking';
+        
+        const formData = new FormData(bookingForm);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            task_type: formData.get('service'),
+            datetime_preference: formData.get('datetime'),
+            submission_timestamp: new Date().toISOString(),
+            source: 'Aura Interface v1'
+        };
+
+        submitBookingBtn.disabled = true;
+        bookingBtnText.classList.add('hidden');
+        bookingSpinner.classList.remove('hidden');
+        bookingMessage.innerHTML = '';
+
+        fetch(n8nWebhookUrl, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (response.ok) { return response.json(); }
+            if(response.headers.get("content-type")?.includes("application/json")){
+                 return response.json().then(err => {throw new Error(err.message || 'Something went wrong')});
+            }
+            return response.text().then(text => {throw new Error(text || 'Server error')});
+        })
+        .then(data => {
+            bookingMessage.innerHTML = `<p class="text-green-400">Task accepted. The relevant agent has been notified.</p>`;
+            bookingForm.reset();
+            setTimeout(closeModal, 3000);
+        })
+        .catch((error) => {
+            if (n8nWebhookUrl.includes('YOUR_N8N_WEBHOOK_URL')) {
+                 bookingMessage.innerHTML = `<p class="text-yellow-400"><strong>Demonstration Mode:</strong> The form is working. Replace the placeholder URL in the script with your live n8n webhook URL to process tasks.</p>`;
+                 setTimeout(closeModal, 5000);
+            } else {
+                 bookingMessage.innerHTML = `<p class="text-red-400">A system error occurred. Please try again. ${error.message}</p>`;
+            }
+        })
+        .finally(() => {
+            submitBookingBtn.disabled = false;
+            bookingBtnText.classList.remove('hidden');
+            bookingSpinner.classList.add('hidden');
+        });
+    });
+
+    // --- Smooth scrolling for anchor links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            if (!mobileMenu.classList.contains('hidden')) { mobileMenu.classList.add('hidden'); }
+        });
+    });
+
+    // --- Contact Form (Placeholder for Comms Agent) ---
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        // This could also be wired to a separate n8n webhook for communications
+        const contactButton = contactForm.querySelector('button');
+        contactButton.textContent = 'Message Received';
+        setTimeout(() => { 
+            contactButton.textContent = 'Submit to Agent';
+            contactForm.reset();
+        }, 2000);
+    });
+</script>
+
+</body>
+</html>
